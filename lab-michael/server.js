@@ -21,7 +21,11 @@ const server = http.createServer(function(req, res) {
   if(req.url.pathname === '/') {
     res.writeHead(200,
       {'Content-Type': 'text/plain'});
-    res.write('Hello World');
+    res.write('Hello World\n');
     res.end();
+    return;
   }
+});
+server.listen(PORT, function() {
+  console.log('The server is now listening d(- -)b ', PORT);
 });
