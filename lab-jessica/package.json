@@ -1,0 +1,19 @@
+{
+  "name": "lab-07-cowsay-server",
+  "version": "1.0.0",
+  "description": "Lab 06 - Cowsay",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicamvs/lab-07-cowsay-server.git"
+  },
+  "author": "Jessica Vasquez-Soltero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessicamvs/lab-07-cowsay-server/issues"
+  },
+  "homepage": "https://github.com/jessicamvs/lab-07-cowsay-server#readme"
+}
