@@ -11,7 +11,11 @@ exports.parseBody = function(req, callback) {
   });
 
   req.on('end', function() {
-    body = JSON.parse(body);
+    if (body) {
+      body = JSON.parse(body);
+    } else {
+      body = {};
+    }
     callback(body);
   });
 };
