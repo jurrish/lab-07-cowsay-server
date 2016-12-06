@@ -2,7 +2,6 @@ const http = require('http');
 const url = require('url');
 const queryString = require('querystring');
 const cowsay = require('cowsay');
-const fs = require('fs');
 const parseBody = require('./lib/parse-body');
 
 const PORT = process.env.PORT || 3000;
@@ -16,15 +15,20 @@ server.on('request', function(req, res) {
   var query = queryString.parse(str);  //thank you http://stackoverflow.com/questions/18769673/get-querystring-in-node-js
   if (req.method === 'POST') {
     parseBody(req, function() {
-      console.log(req);
+      if (req.body.text) { //if there is a text property in the body object of the request object
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end(cowsay.say({text: req.body.text})); //make the cow say whatever string is in the value to the text property
+      } else { //otherwise it was a bad request
+        res.end(cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
+      } // shell command to make this work: curl -H "Content-Type: application/json" -X POST -d '{"text": "moo!"}' http://localhost:3000
     });
   }
-  else if (req.method === 'GET') {
-    if (path === '/') {
+  else if (req.method === 'GET') { //if it's a get request
+    if (path === '/') { //and the route is the home filepath
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('hello world');
+      res.end('hello world'); //write hello world in the body of the response
     }
-    else if (path ==='/cowsay') {
+    else if (path =='/cowsay') {
       if (query.text) {
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end(cowsay.say({text: query.text}));
@@ -33,7 +37,6 @@ server.on('request', function(req, res) {
         res.writeHead(400, {'Content-Type': 'text/plain'});
         res.end(cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
       }
-      // res.writeHead(200, {'Content-Type': 'text/plain'})
     }
   }
 });

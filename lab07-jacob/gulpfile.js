@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
-const mocha = require('gulp-mocha');
 
 gulp.task('lint', function() {
   return gulp.src(['**/*.js', '!node_modules'])
@@ -8,9 +7,5 @@ gulp.task('lint', function() {
   .pipe(eslint.format());
 });
 
-gulp.task('test', function() {
-  return gulp.src(['./test/*.js'])
-  .pipe(mocha());
-});
 
-gulp.task('default', ['test']);
+gulp.task('default', ['eslint']);
