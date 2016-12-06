@@ -27,23 +27,23 @@ let server = http.createServer(function(req, res){
       res.write(cowsay.say({text: 'bad request/ntry: localhost:3000/cowsay?text=howdy'}));
       res.end();
     }
+  }
 
-    if(req.method === 'POST' && path.pathname === '/cowsay'){
-      parseBody(req, function(err){
-        if(err) return console.err(err);
-      });
-      if(path.query){
-        fs.createReadStream('./server.js').pipe(res);
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.write(cowsay.say({text: query.message}));
-        res.end();
-      }
-    }
-    else {
-      res.writeHead(400, {'Content-Type': 'text/plain'});
-      res.write(cowsay.say({text: 'bad request/ntry: localhost:3000/cowsay?text=howdy'}));
+  if(req.method === 'POST' && path.pathname === '/cowsay'){
+    parseBody(req, function(err){
+      if(err) return console.err(err);
+    });
+    if(path.query){
+      fs.createReadStream('./server.js').pipe(res);
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write(cowsay.say({text: query.message}));
       res.end();
     }
+  }
+  else {
+    res.writeHead(400, {'Content-Type': 'text/plain'});
+    res.write(cowsay.say({text: 'bad request/ntry: localhost:3000/cowsay?text=howdy'}));
+    res.end();
   }
 });
 
