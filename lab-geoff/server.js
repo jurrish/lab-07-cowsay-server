@@ -3,6 +3,7 @@
 let http = require('http');
 let url = require('url');
 let querystring = require('querystring');
+let cowsay = require('cowsay');
 
 let PORT = process.env.PORT || 3000;
 
@@ -15,6 +16,9 @@ let server = http.createServer(function(req, res) {
   res.writeHead(200, {
     'Content-type' : 'text/plain',
   });
+  console.log(cowsay.say({
+    text: 'i am cow',
+  }));
   res.write('hello world \n');
   res.end();
 

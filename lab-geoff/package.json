@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/geoffreycc/lab-07-cowsay-server#readme",
   "devDependencies": {
+    "cowsay": "^1.1.8",
     "mocha": "^3.2.0"
   }
 }
