@@ -4,7 +4,7 @@ let http = require('http');
 let url = require('url');
 let querystring = require('querystring');
 
-let PORT = 3000;
+let PORT = process.env.PORT || 3000;
 
 let server = http.createServer(function(req, res) {
   req.url = url.parse(req.url);
@@ -25,21 +25,22 @@ let server = http.createServer(function(req, res) {
 
   if(req.method === 'GET' && req.url.pathname === '/cowsay') { //add and for /cowsay
     console.log('cowsay get request block');
-
-    // if(text = message) {
-    //   status 200
-    //   Content-type text/plain
-    //   cowsay querystring text
-    // }
-    //
-    // if (!text = message) {
-    //   status 400
-    //   Content-type text/plain
-    //   cowsay specific message in assignment
-    // }
-    //fs read stream from some file for query string?
+    if(req.url.query.text) {
+      console.log('text equals message');
+      res.writeHead(200, {
+        'Content-type': 'text/plain',
+      });
+      //cowsay querystring body
+      res.end();
+    } else {
+      console.log('text does not equal message');
+      res.writeHead(400, {
+        'Content-type': 'text/plain',
+      });
+      //cowsay some kind of error
+      res.end();
+    }
   }
-
 });
 
 server.listen(PORT, function() {
