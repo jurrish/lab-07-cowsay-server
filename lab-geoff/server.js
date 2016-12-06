@@ -16,6 +16,10 @@ let server = http.createServer(function(req, res) {
 
   if(req.method === 'POST') {
     console.log('post request block');
+    // if json in body {text: message}
+    // if not
+    res.write('post request \n');
+    res.end();
     //parse body stuff from handler
   }
 
@@ -44,11 +48,13 @@ let server = http.createServer(function(req, res) {
       res.end();
     }
   }
-  res.writeHead(200, {
-    'Content-type' : 'text/plain',
-  });
-  res.write('hello world \n');
-  res.end();
+  if (req.url.pathname === '/') { //this is not working right - only for  /
+    res.writeHead(200, {
+      'Content-type' : 'text/plain',
+    });
+    res.write('hello world \n');
+    res.end();
+  }
 });
 
 server.listen(PORT, function() {
