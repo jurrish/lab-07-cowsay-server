@@ -1,6 +1,6 @@
 'use strict';
 
-const cowsayresponse = require('../lib/cowsayresponse');
+const cowsayres = require('../lib/cowsayres');
 const assert = require('assert');
 
 describe('CowsayResponse', function() {
