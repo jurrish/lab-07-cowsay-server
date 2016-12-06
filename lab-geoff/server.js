@@ -35,15 +35,20 @@ let server = http.createServer(function(req, res) {
         'Content-type': 'text/plain',
       });
       res.write(cowsay.say({
-        text: `${req.url.query.text}`,
-      }));
+        text: `\n${req.url.query.text}\n`,
+        e: '00',
+      }) + '\n');
       res.end();
     } else {
       console.log('text does not equal message');
       res.writeHead(400, {
         'Content-type': 'text/plain',
       });
-      //cowsay some kind of error
+      res.write(cowsay.say({
+        text: 'bad request\ntry: localhost:3000/cowsay?text=howdy',
+        e: 'xx',
+        T: 'U ',
+      }) + '\n');
       res.end();
     }
   }
