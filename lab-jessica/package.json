@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/jessicamvs/lab-07-cowsay-server/issues"
   },
-  "homepage": "https://github.com/jessicamvs/lab-07-cowsay-server#readme"
+  "homepage": "https://github.com/jessicamvs/lab-07-cowsay-server#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1"
+  }
 }
