@@ -8,21 +8,26 @@ const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(function(req, res){
   req.url = url.parse(req.url);
-
+  req.url.query = queryString.parse(req.url.query);
 
   if(req.url.pathname === '/') {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.write(cowsay.say({f: 'ghostbusters', text: 'hello world'}));
     res.end();
-    return;
   }
 
-  if(req.url.pathname === '/cowsay' && req.method === 'GET') {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.write(cowsay.say({f: 'ghostbusters', text: 'hello world'}));
+  if (req.method === 'GET' && req.url.pathname === '/cowsay') {
+    if (req.url.query.text) {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write(cowsay.say({f: 'hellokitty', text: req.url.query.text}));
+      res.end();
+    }
+
+    res.writeHead(400, {'Content-Type': 'text/plain'});
+    res.write(cowsay.say({f: 'dragon', text: 'You gave me nothing to say!'}));
     res.end();
-    return;
   }
+
 
 
 
