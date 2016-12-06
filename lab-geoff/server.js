@@ -1,10 +1,13 @@
 'use strict';
 
 let http = require('http');
+let url = require('url');
+
 let PORT = 3000;
 
 let server = http.createServer(function(req, res) {
-  console.log(req);
+  req.url = url.parse(req.url);
+  console.log(req.url);
   res.write('hello world');
   res.end();
   return;
