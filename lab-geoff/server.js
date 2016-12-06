@@ -13,14 +13,6 @@ let server = http.createServer(function(req, res) {
   req.url.query = querystring.parse(req.url.query);
   console.log(req.url.query);
 
-  // res.writeHead(200, {
-  //   'Content-type' : 'text/plain',
-  // });
-  // console.log(cowsay.say({
-  //   text: 'i am cow',
-  // }));
-  // res.write('hello world \n');
-  // res.end();
 
   if(req.method === 'POST') {
     console.log('post request block');
@@ -52,6 +44,11 @@ let server = http.createServer(function(req, res) {
       res.end();
     }
   }
+  res.writeHead(200, {
+    'Content-type' : 'text/plain',
+  });
+  res.write('hello world \n');
+  res.end();
 });
 
 server.listen(PORT, function() {
