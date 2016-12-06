@@ -1,11 +1,16 @@
 'use strict';
 
-const cowsayhttp = require('../lib/cowsayhttp');
+const cowsayresponse = require('../lib/cowsayresponse');
 const assert = require('assert');
 
-describe('CowsayHTTP', function() {
+describe('CowsayResponse', function() {
   describe('#getCowsay()', function() {
-    it('should return cowsay based on the text given', function() {
+    it('should return cowsay based on the body/text given', function() {
+
+    });
+  });
+  describe('#postCowsay()', function() {
+    it('should return cowsay based on the body/text given', function() {
 
     });
   });
