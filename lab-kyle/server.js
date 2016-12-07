@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 3000;
 const server = module.exports = http.createServer(function(req, res) {
   req.url = url.parse(req.url);
   let query = queryString.parse(req.url.query);
+  let animal = query.animal || 'default';
   res.setHeader('Content-Type', 'text/html');
+
 
   if(req.method === 'GET') {
     console.log('get request received');
@@ -23,7 +25,7 @@ const server = module.exports = http.createServer(function(req, res) {
 
     if(req.url.pathname === '/cowsay') {
       if(query.text) {
-        writeRes(200, query.text);
+        writeRes(200, query.text, animal);
       }
       else {
         writeRes(400, 'bad request\ntry: localhost:3000/cowsay?text=howdy');
@@ -39,9 +41,9 @@ const server = module.exports = http.createServer(function(req, res) {
 
   }
 
-  function writeRes(statusCode, text) {
+  function writeRes(statusCode, text, animal) {
     res.statusCode = statusCode;
-    res.write(cowsay.say({text: text}));
+    res.write(cowsay.say({text: text, f: animal}));
     res.end();
   }
 });

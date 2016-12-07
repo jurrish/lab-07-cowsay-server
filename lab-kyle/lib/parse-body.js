@@ -8,7 +8,7 @@ module.exports = function(req, res, cowsay, helper, callback) {
     let parsedBody = JSON.parse(req.body);
 
     if(parsedBody.text) {
-      helper(200, parsedBody.text);
+      helper(200, parsedBody.text, parsedBody.animal);
     } else {
       helper(400, 'bad request\ntry: localhost:3000/cowsay?text=howdy');
     }
