@@ -3,7 +3,6 @@
 const http = require('http');
 const url = require('url');
 const queryString = require('querystring');
-const fs = require('fs');
 
 const cowsay = require('cowsay');
 
@@ -31,22 +30,24 @@ const server = http.createServer(function(req, res) {
       res.writeHead(400, {'Content-Type': 'text/plain'});
       res.write(cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy&animal=meow'}) + '\n');
     }
+    res.end();
   }
+
   if(req.method === 'POST') {
     parseBody(req, function(err) {
       if (err) return console.error(err);
       var message = req.body.text;
 
-      if(message) {
+      if(message && path === '/cowsay') {
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        fs.createReadStream(cowsay.say({text: message}) + '\n').pipe(res);
+        res.write(cowsay.say({text: message}) + '\n');
       } else {
         res.writeHead(400, {'Content-Type': 'text/plain'});
         res.write(cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy'}) + '\n');
       }
+      res.end();
     });
   }
-  res.end();
 });
 
 server.listen(PORT, function () {
