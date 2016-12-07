@@ -1,3 +1,4 @@
 # Lab 07 - Cowsay server
 
-The purpose of this project is to 
+This app will make both GET and POST request using the http module of node and send a
+response using cowsay. 
