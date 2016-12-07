@@ -2,7 +2,7 @@
   "name": "lab-07-cowsay-server",
   "version": "1.0.0",
   "description": "Lab 06 - Cowsay",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha"
   },
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/jessicamvs/lab-07-cowsay-server#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-mocha": "^3.0.1"
+    "gulp-eslint": "^3.0.1"
   },
   "dependencies": {
     "cowsay": "^1.1.8"
