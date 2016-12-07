@@ -15,6 +15,9 @@
 * add a gitignore
 * add a readme with project description
 * add a gulpfile
+* test your code
+  * ensure that all of your methods have test coverage
+  * write tests which start your server, send and receive, and confirm functionality
 
 # Directions
 * Create a HTTP Server using the http module
@@ -31,7 +34,7 @@ for all request to `/` the server should respond with the following:
 #### GET REQUEST    
 * the query string should have the key value `text=<message>`
 * the response header should include `Content-Type: text/plain`
-* if the query `text=messsage` is set, respond with:  
+* if the query `text=message` is set, respond with:  
  * a status code of 200
  * a body including the value returned from `cowsay.say({text: <querystring text>})`
 * if the query `text=message` is **not** set, respond with:  
@@ -40,13 +43,12 @@ for all request to `/` the server should respond with the following:
 
 #### POST REQUEST   
 * the response header should include `Content-Type: text/plain`
-* if the json `{text: messsage}` is set in the body, respond with:  
+* if the json `{text: message}` is set in the body, respond with:  
  * a status code of 200
  * a body including the value returned from `cowsay.say({text: <querystring text>})`
-* if the json`{text: messsage}`is **not** set in the body, respond with:  
+* if the json`{text: message}`is **not** set in the body, respond with:  
  * status code = 400
  * a body including the value returned from `cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy'})`
 
 ## Bonus
-* **2pts** - add the ability to change the cowfile, **aka: dragon, sheep, ect** using a querysting
-
+* **2pts** - add the ability to change the cow-file, **aka: dragon, sheep, etc** using a querystring
