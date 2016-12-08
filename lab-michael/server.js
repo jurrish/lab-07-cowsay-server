@@ -44,7 +44,7 @@ const server = http.createServer(function(req, res) {
         {'Content-Type': 'text/plain'});
       res.write(cowsay.say({
         text: 'Error 400\ntry: localhost:3000/cowsay?text=howdy\n',
-        f:'dragon'
+        f:'dragon',
       }));
     }
     res.end();
@@ -65,7 +65,7 @@ const server = http.createServer(function(req, res) {
         res.writeHead(400, {'Content-Type': 'text/plain'});
         res.write(cowsay.say({
           text: 'Error 400\ntry: localhost:3000/cowsay?text=howdy',
-          f: 'dragon'
+          f: 'dragon',
         }));
       }
       res.end();
