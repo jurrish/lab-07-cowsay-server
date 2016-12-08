@@ -3,8 +3,8 @@ const cowsay = require('cowsay');
 const http = require('http');
 const url = require('url');
 const queryString = require('querystring');
-
 const PORT = process.env.PORT || 3000;
+const parseBody = require('./lib/parsebody.js');
 
 const server = http.createServer(function(req, res){
   req.url = url.parse(req.url);
@@ -24,12 +24,24 @@ const server = http.createServer(function(req, res){
     }
 
     res.writeHead(400, {'Content-Type': 'text/plain'});
-    res.write(cowsay.say({f: 'dragon', text: 'You gave me nothing to say!'}));
+    res.write(cowsay.say({text: ' bad request\ntry: localhost:3000' + req.url.href}));
     res.end();
   }
 
-
-
+  if (req.method === 'POST' && req.url.pathname === '/cowsay') {
+    parseBody(req, function(err, body){
+      if(err) return console.error(err);
+      if(req.body.text){
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.write(cowsay.say({text: body}));
+        res.end();
+      } else {
+        res.writeHead(400, {'Content-Type': 'text/plain'});
+        res.write(cowsay.say({text: 'bad request\ntry: http POST :3000/cowsay text=="howdy"'}));
+        res.end();
+      }
+    });
+  }
 
 });
 
