@@ -1,6 +1,6 @@
 # Cowsay App
 
-This app uses a simple http server to return a talking animal of your choice through a get request. You may also post a talking cow.
+This app uses a simple http server to return a talking animal of your choice through a GET request. You may also POST a talking cow.
 
 ## Starting the Server
 
@@ -16,10 +16,10 @@ This simply returns a string saying 'Hello World'.
 
 Use a query string to return a specific cowfile and message.
 
-`Example curl command: curl 'localhost:3000/cowsay?text=message&animal=dragon'`
+Example curl command: `curl 'localhost:3000/cowsay?text=message&animal=dragon'`
 
 ### POST request to /cowsay
 
 You may POST a talking cow by posting to /cowsay.
 
-`Example curl command: curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"text": "message"}' localhost:3000/cowsay`
+Example curl command: `curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"text": "message"}' localhost:3000/cowsay`
