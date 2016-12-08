@@ -23,23 +23,33 @@ const server = http.createServer(function(req, res) {
     res.writeHead(200,
       {'Content-Type': 'text/plain'});
     res.write('Hello World\n');
+    res.write(cowsay.say({
+      text: 'WELCOME\n',
+    }));
     res.end();
     return;
   }
   // GET REQUEST
   if (req.method === 'GET' && req.url.pathname ==='/cowsay') {
-
+    let queryCowText = req.url.query.text;
+    // let queryDragonText = req.url.query.text.f;
     if (req.url.query.text) {
+      // console.log(req.url.query.text);
       res.writeHead(200,
         {'Content-Type': 'text/plain'});
-      let queryCowText = req.url.query.text;
-      res.write(cowsay.say({text: queryCowText}));
-      res.end();
+      res.write(cowsay.say({
+        text: queryCowText,
+        f: req.url.query.text.f,
+      }));
     } else {
       res.writeHead(400,
         {'Content-Type': 'text/plain'});
-      res.end();
+      res.write(cowsay.say({
+        text: 'bad request\ntry: localhost:3000/cowsay?text=howdy\n',
+        f:'dragon'
+      }));
     }
+    res.end();
     return;
   }
 
@@ -51,19 +61,26 @@ const server = http.createServer(function(req, res) {
         res.writeHead(200,
           {'Content-Type': 'text/plain'});
         res.write(cowsay.say({text: req.body.text}));
-        res.end();
+
       } else {
         res.writeHead(400, {'Content-Type': 'text/plain'});
-        res.write(cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
-        res.end();
+        res.write(cowsay.say({
+          text: 'Error 400\ntry: localhost:3000/cowsay?text=howdy',
+          f: 'dragon'
+        }));
       }
+      res.end();
+      return;
     });
-    return;
   }
-
-  res.statusCode = 404;
-  res.write(cowsay.say({text: 'OOPS!\n Pathname not found\n'}));
+  res.writeHead(400, {'Content-Type': 'text/plain'});
+  res.write(cowsay.say({
+    text: 'ERROR 404!!  \nplease try again.',
+    f: 'ghostbusters',
+  }));
   res.end();
+
+
 
 });
 
