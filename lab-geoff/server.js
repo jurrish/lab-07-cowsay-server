@@ -28,6 +28,12 @@ let server = http.createServer(function(req, res) {
         res.end();
       } else {
         console.log('no text in body');
+        res.writeHead(400, {
+          'Content-type': 'text/plain',
+        });
+        res.write(cowsay.say({
+          text: 'bad request\ntry: localhost:3000/cowsay?text=howdy',
+        }) + '\n');
         res.end();
       }
     });
