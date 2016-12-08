@@ -14,7 +14,6 @@ let server = http.createServer(function(req, res) {
   req.url.query = querystring.parse(req.url.query);
   console.log(req.url.query);
 
-
   if(req.method === 'POST') {
     console.log('post request block');
     reqHandler(req, function(string) {
@@ -39,7 +38,7 @@ let server = http.createServer(function(req, res) {
     });
   }
 
-  if(req.method === 'GET' && req.url.pathname === '/cowsay') {
+  else if(req.method === 'GET' && req.url.pathname === '/cowsay') {
     console.log('cowsay get request block');
     if(req.url.query.text) {
       console.log('text equals message');
@@ -65,7 +64,7 @@ let server = http.createServer(function(req, res) {
     }
   }
 
-  if (req.method === 'GET' && req.url.pathname === '/') {
+  else if (req.method === 'GET' && req.url.pathname.startsWith('/')) {
     res.writeHead(200, {
       'Content-type' : 'text/plain',
     });
