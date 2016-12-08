@@ -13,7 +13,7 @@ server.on('request', function(req, res) {
   var path = url.parse(req.url).pathname;
   var str = req.url.split('?')[1];
   var query = queryString.parse(str);  //thank you http://stackoverflow.com/questions/18769673/get-querystring-in-node-js
-  if (req.method === 'POST') {
+  if (req.method === 'POST' && path === '/cowsay') {
     parseBody(req, function() {
       if (req.body.text) { //if there is a text property in the body object of the request object
         res.writeHead(200, {'Content-Type': 'text/plain'});
