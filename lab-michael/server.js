@@ -7,45 +7,43 @@ const queryString = require('querystring');
 
 const parseBody = require('./lib/bodyParser.js');
 
-const cowsay = require('cowsay');  // Moooooo
+const cowsay = require('cowsay');
 
 
 const PORT = process.env.PORT || 3000;  //usr def or 3000
 
-// module.exports = exports = {};
+
 // Create the server request
 const server = http.createServer(function(req, res) {
   req.url = url.parse(req.url);
   req.url.query = queryString.parse(req.url.query);
-  console.log(req.method);
 
   if(req.url.pathname === '/') {
     res.writeHead(200,
       {'Content-Type': 'text/plain'});
     res.write('Hello World\n');
-    res.write(cowsay.say({
-      text: 'WELCOME\n',
-    }));
     res.end();
     return;
   }
+
   // GET REQUEST
   if (req.method === 'GET' && req.url.pathname ==='/cowsay') {
     let queryCowText = req.url.query.text;
-    // let queryDragonText = req.url.query.text.f;
-    if (req.url.query.text) {
-      // console.log(req.url.query.text);
+
+    if (queryCowText) {
+
       res.writeHead(200,
         {'Content-Type': 'text/plain'});
       res.write(cowsay.say({
         text: queryCowText,
         f: req.url.query.text.f,
       }));
+
     } else {
       res.writeHead(400,
         {'Content-Type': 'text/plain'});
       res.write(cowsay.say({
-        text: 'bad request\ntry: localhost:3000/cowsay?text=howdy\n',
+        text: 'Error 400\ntry: localhost:3000/cowsay?text=howdy\n',
         f:'dragon'
       }));
     }
@@ -56,7 +54,8 @@ const server = http.createServer(function(req, res) {
 // POST REQUEST
   if(req.method === 'POST' && req.url.pathname ==='/cowsay') {
     parseBody(req, function(err) {
-      if(err) return console.log(err);
+      if(err) return console.error(err);
+
       if(req.body.text) {
         res.writeHead(200,
           {'Content-Type': 'text/plain'});
@@ -73,14 +72,13 @@ const server = http.createServer(function(req, res) {
       return;
     });
   }
+
   res.writeHead(400, {'Content-Type': 'text/plain'});
   res.write(cowsay.say({
     text: 'ERROR 404!!  \nplease try again.',
     f: 'ghostbusters',
   }));
   res.end();
-
-
 
 });
 
