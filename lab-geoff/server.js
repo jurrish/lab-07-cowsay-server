@@ -64,16 +64,16 @@ let server = http.createServer(function(req, res) {
       res.end();
     }
   }
-  // if (req.url.pathname === '/') { //this is not working right - only for  /
-  //   res.writeHead(200, {
-  //     'Content-type' : 'text/plain',
-  //   });
-  //   res.write('hello world \n');
-  //   res.end();
-  // }
+
+  if (req.method === 'GET' && req.url.pathname === '/') {
+    res.writeHead(200, {
+      'Content-type' : 'text/plain',
+    });
+    res.write('hello world \n');
+    res.end();
+  }
 });
 
 server.listen(PORT, function() {
   console.log('server running on port ' + PORT);
 });
-
