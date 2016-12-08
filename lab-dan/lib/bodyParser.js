@@ -1,11 +1,18 @@
 'use strict';
 
-const cowSay = require('cowSay');
+module.exports = function(request, callback) {
+  request.body = '';
 
-module.exports = function bodyParser (string) {
-  return cowSay.say({
-    text: string,
-    e: 'Oo',
-    T: 'U ',
+  request.on('data', function(data){
+    request.body += data.toString();
+  });
+
+  request.on('end', function(){
+    try {
+      request.body = JSON.parse(request.body);
+      callback(null, request.body);
+    } catch (err) {
+      callback(err);
+    }
   });
 };

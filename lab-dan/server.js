@@ -8,13 +8,18 @@ const PORT = process.env.PORT || 3000;
 function start (route, handle) {
   function onRequest (request, response) {
     let pathname = url.parse(request.url).pathname;
-    console.log('The following pathname was requested:', pathname);
-    route(handle, pathname, request, response);
+    if (route && handle) return route(handle, pathname, request, response);
+    response.writeHeader(200, {'Content-Type':'text/plain'});
+    response.write('Hello, World!');
+    response.end();
   }
 
-  http.createServer(onRequest).listen(PORT, function(){
+  let server = http.createServer(onRequest);
+  server.listen(PORT, function(){
     console.log('server started on port:', PORT);
   });
+
+  return server;
 }
 
 exports.start = start;

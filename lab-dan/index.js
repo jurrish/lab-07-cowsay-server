@@ -7,6 +7,9 @@ const requestHandler = require('./lib/requestHandler');
 let handle = {};
 handle.error = requestHandler.error;
 handle['/'] = requestHandler.greeter;
-handle['/cowsay'] = requestHandler.cowSay;
+handle['/cowsay'] = requestHandler.cowsay;
 
-server.start(router.route, handle);
+let myApp = server.start(router.route, handle);
+
+// for testing purposes
+module.exports = myApp;
