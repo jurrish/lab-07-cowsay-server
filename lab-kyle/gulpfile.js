@@ -3,8 +3,8 @@ const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 
 gulp.task('test', function() {
-  gulp.src('./test/server-test.js', {read: false})
-  .pipe(mocha({reporter: 'nyan'}));
+  gulp.src('./tests/server-test.js', {read: false})
+  .pipe(mocha());
 });
 
 gulp.task('lint', function(){
