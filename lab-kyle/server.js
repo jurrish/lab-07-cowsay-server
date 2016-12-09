@@ -17,10 +17,11 @@ const server = module.exports = http.createServer(function(req, res) {
 
 
   if(req.method === 'GET') {
-    console.log('get request received');
 
     if(req.url.pathname === '/') {
-      writeRes(200, 'hello world');
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write('hello world');
+      res.end();
     }
 
     if(req.url.pathname === '/cowsay') {
@@ -34,7 +35,6 @@ const server = module.exports = http.createServer(function(req, res) {
   }
 
   if(req.method === 'POST') {
-    console.log('post request received');
     parse(req, res, cowsay, writeRes, function(err) {
       if (err) console.error(err);
     });
