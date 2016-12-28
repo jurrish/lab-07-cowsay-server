@@ -10,10 +10,15 @@
   "author": "jacob isenberg",
   "license": "ISC",
   "devDependencies": {
-    "cowsay": "^1.1.8",
+    "chai": "^3.5.0",
     "eslint": "^3.11.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^3.0.1"
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.2.0",
+    "superagent": "^3.3.1"
+  },
+  "dependencies": {
+    "cowsay": "^1.1.9"
   }
 }

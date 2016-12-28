@@ -17,8 +17,10 @@ server.on('request', function(req, res) {
     parseBody(req, function() {
       if (req.body.text) { //if there is a text property in the body object of the request object
         res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.write(req.body.text);
         res.end(cowsay.say({text: req.body.text})); //make the cow say whatever string is in the value to the text property
       } else { //otherwise it was a bad request
+        res.writeHead(400, {'Content-Type': 'text/plain'});
         res.end(cowsay.say({text: 'bad request\ntry: localhost:3000/cowsay?text=howdy'}));
       } // shell command to make this work: curl -H "Content-Type: application/json" -X POST -d '{"text": "moo!"}' http://localhost:3000
     });
